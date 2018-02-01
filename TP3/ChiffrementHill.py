@@ -49,30 +49,25 @@ def matriceIdent(taille):
 def inverseMatrice(matrice, taille, coeff):
     ident = matriceIdent(taille)
     indexBonJ = 0
-    indexBonI = 0
-    ligne = 1
+    ligne = 0
     trouve = False
     while ligne < taille:
         print(ligne)
-        i = 0
-        while not trouve and i < taille:
-            for j in range(i, taille):
-                if mulinv(matrice[j][i], coeff) is not None:
-                    indexBonJ = j
-                    indexBonI = i
-                    trouve = True
-                    break
-                print(j)
-                pass
-            i += i
+        for j in range(ligne, taille):
+            if mulinv(matrice[j][ligne], coeff) is not None:
+                indexBonJ = j
+                trouve = True
+                break
             pass
-        ligne += ligne
+        print(indexBonJ)
+        ligne = ligne + 1
         if not trouve:
             print("La matrice n'est pas inversible")
             return []
         if indexBonJ != ligne:
             matrice[ligne], matrice[indexBonJ], ident[ligne], ident[indexBonJ] = matrice[indexBonJ], matrice[ligne], ident[indexBonJ], ident[ligne]
         inv = mulinv(matrice[ligne][ligne], coeff)
+        print("Inv = ", inv)
         matrice[ligne] = [inv * x for x in matrice[ligne]]
         ident[ligne] = [inv * x for x in ident[ligne]]
     return ident
