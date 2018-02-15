@@ -1,2 +1,4 @@
 Cesar*.txt
 message*.txt
+*.pyc
+__pycache__
