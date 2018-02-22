@@ -16,26 +16,32 @@ def blockSize(textIn):
         pass
 
 
-def makeDico():
-    dic = {}
+def makeList():
+    dic = []
     for i in range(256):
         k = "a" * 15 + chr(i)
-        c = ECB_oracle_chall12(k)
-        dic[chr(i)] = c
+        c = ECB_oracle_chall12(k)[0:16]
+        dic.append(c)
     return dic
 
 
-def decode(dico):
+def decode(listIn):
+    listEnd = []
+    tailleMax = len(ECB_oracle_chall12(""))
     k = 'a' * 15
     phrase = ECB_oracle_chall12(k)
-    for i, val in dico.items():
-        print("keys = " + i)
-        if val == phrase:
-            return i[15]
+    for index in range(tailleMax):
+        for i in range(len(listIn)):
+            print(index)
+            print(i)
+            if listIn[i] == phrase:
+                listEnd.append(chr(i))
+                pass
             pass
         pass
-    return"-1"
+    return listEnd
 
 
 if __name__ == '__main__':
-    print(str(decode(makeDico())))
+    print(str(decode(makeList())))
+    print("End")
