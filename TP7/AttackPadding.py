@@ -9,7 +9,7 @@ import math
 def makeSocket():
     s = socket.socket(
     socket.AF_INET, socket.SOCK_STREAM)
-    s.connect(("localhost", 9999))
+    s.connect(("localhost", 10345))
     return s
 
 
@@ -18,6 +18,7 @@ def oracle(modulo, cipher):
     k = int(math.ceil(math.log(modulo, 2)) / 8)
     s.sendall(cipher.to_bytes(k, "big"))
     data = s.recv(1024)
+    print(data)
     return data.decode()[0] == "O"
     pass
 
