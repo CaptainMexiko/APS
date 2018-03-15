@@ -16,6 +16,7 @@ def makeSocket():
 def oracle(modulo, cipher):
     s = makeSocket()
     k = int(math.ceil(math.log(modulo, 2)) / 8)
+    print(k)
     s.sendall(cipher.to_bytes(k, "big"))
     data = s.recv(1024)
     print(data)
